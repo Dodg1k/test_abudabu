@@ -22,3 +22,9 @@ jobs:
           pip install -r requirements.txt
       - name: Test with pytest
         run: pytest -vv
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: exe
+          path: build/hello_world.exe
