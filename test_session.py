@@ -1,23 +1,29 @@
-# import pytest
-import pytest
+from unittest import TestCase, main
+from cicle import circle_area
+from math import pi
 
-# import the function from your file
-from session import add_numbers
 
-# Check if properly adds positive numbers
-def test_add_positive():
-    assert add_numbers(1,2) == 3
+class TestCircleArea(TestCase):
+    def test_area(self):
+        self.assertEqual(circle_area(3), pi*3**2)
+        self.assertEqual(circle_area(1), pi)
+        self.assertEqual(circle_area(0), 0)
+        self.assertEqual(circle_area(2.5), pi*2.5**2)
 
-# Check if properly adds zero
-def test_add_zero():
-    assert add_numbers(1,0) == 1
+    def test_values(self):
+        self.assertRaises(ValueError, circle_area, -2)
+        self.assertRaises(ValueError, circle_area, -12312)
 
-# Check with negative numbers
-def test_add_negative():
-    assert add_numbers(4, -100) == -96
+    def test_type(self):
+        self.assertRaises(TypeError, circle_area, 2 + 3j)
+        self.assertRaises(TypeError, circle_area, 'one')
+        self.assertRaises(TypeError, circle_area, [4])
+        self.assertRaises(TypeError, circle_area, "Кукуруза")
+        self.assertRaises(TypeError, circle_area, [7, 22])
+        self.assertRaises(TypeError, circle_area, False)
 
-# Now check if it correctly produces error when provided so
-def test_add_string_expect_exception():
-    with pytest.raises(TypeError):
-        add_numbers(4, 'I do not belong here')
+
+# if __name__ == '__main__':
+#     main()
+
 
